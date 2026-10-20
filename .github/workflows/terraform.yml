@@ -29,6 +29,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check required repository variables
+        env:
+          AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+          BUCKET_NAME: ${{ vars.TF_BUCKET_NAME }}
+        run: |
+          missing=0
+          for v in AWS_ROLE_ARN BUCKET_NAME; do
+            if [ -z "${!v}" ]; then
+              name=$v; [ "$v" = BUCKET_NAME ] && name=TF_BUCKET_NAME
+              echo "::error::Repository variable $name is not set (Settings > Secrets and variables > Actions > Variables)."
+              missing=1
+            fi
+          done
+          exit $missing
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:

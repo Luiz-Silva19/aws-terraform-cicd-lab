@@ -1,5 +1,5 @@
 
-name: deploy cloud aws infrastructure using Terraform
+name: deploy cloud infrastructure using Terraform
 
 on:
   push:
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   deploy:
-    name: Validate and deploy
+    name: Validate and deploy cloud infrastructure
     runs-on: ubuntu-latest
     environment: cloud
 

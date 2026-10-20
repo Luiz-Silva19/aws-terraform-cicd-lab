@@ -1,5 +1,5 @@
 
-name: Terraform S3 Lab
+name: deploy cloud aws infrastructure using Terraform
 
 on:
   push:
